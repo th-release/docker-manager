@@ -5,8 +5,23 @@ import (
 )
 
 func SetupRoute(app *fiber.App) *fiber.App {
-	app.Get("/containers", GetAllContainer)      // get All Container
-	app.Get("/containers/:id", GetByIdContainer) // get by container id
-	app.Get("/network/:id")
+	api := app.Group("/api", Api)
+
+	container := api.Group("/containers", Container)
+	container.Get("/", GetAllContainer)
+	container.Get("/:id", GetByIdContainer)
+	container.Get("/logs/:id", GetByIdContainerLog)
+	container.Post("/pause/:id", PauseContainer)
+	container.Post("/unPause/:id", UnPauseContainer)
+	container.Post("/start/:id", StartContainer)
+	container.Post("/restart/:id", RestartContainer)
+	container.Post("/stop/:id", StopContainer)
+	container.Post("/kill/:id", KillContainer)
+	container.Post("/rename/:id", RenameContainer)
+	container.Post("/remove/:id", RemoveContainer)
+	container.Post("/prune/", PruneContainer)
+	// container.Post("/update/:id", UpdateContainer)
+
+	api.Get("/network/:id")
 	return app
 }
