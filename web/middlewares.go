@@ -9,3 +9,7 @@ func Api(c *fiber.Ctx) error {
 func Container(c *fiber.Ctx) error {
 	return c.Next()
 }
+
+func Network(c *fiber.Ctx) error {
+	return c.Next()
+}
