@@ -22,14 +22,14 @@ func SetupRoute(app *fiber.App) *fiber.App {
 	container.Post("/prune/", PruneContainer)        // 안쓰는 컨테이너 삭제
 	// container.Post("/update/:id", UpdateContainer)
 
-	network := api.Group("/networks", Network) // 네트워크 컨트롤러
-	network.Get("/", GetAllNetwork)            // 모든 네트워크 정보
-	network.Get("/:id", GetByIdNetwork)        // 특정 네트워크 정보
-	network.Post("/create", CreateNetwork)     // 네트워크 생성
-	network.Post("/remove/:id", RemoveNetwork) // 네트워크 삭제
-	network.Post("/connect", ConnectNetwork)   // 특정 컨테이너 특정 네트워크로 연결
-	network.Post("/disconnect", DisconnectNetwork)
-	network.Post("/prune")
+	network := api.Group("/networks", Network)     // 네트워크 컨트롤러
+	network.Get("/", GetAllNetwork)                // 모든 네트워크 정보
+	network.Get("/:id", GetByIdNetwork)            // 특정 네트워크 정보
+	network.Post("/create", CreateNetwork)         // 네트워크 생성
+	network.Post("/remove/:id", RemoveNetwork)     // 네트워크 삭제
+	network.Post("/connect", ConnectNetwork)       // 특정 컨테이너 특정 네트워크로 연결
+	network.Post("/disconnect", DisconnectNetwork) // 특정 네트워크로 연결되어있는 컨테이너 연결 제거
+	network.Post("/prune", PruneNetwork)           // 안쓰는 네트워크 삭제
 	// api.Get("/network/:id")
 	return app
 }
