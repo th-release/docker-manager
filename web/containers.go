@@ -30,7 +30,9 @@ func GetAllContainer(c *fiber.Ctx) error {
 
 	defer cli.Close()
 
-	containers, err := cli.ContainerList(context.Background(), container.ListOptions{})
+	containers, err := cli.ContainerList(context.Background(), container.ListOptions{
+		All: true,
+	})
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(utils.BasicResponse[*bool]{
 			Success: false,
