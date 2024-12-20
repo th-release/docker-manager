@@ -13,3 +13,7 @@ func Container(c *fiber.Ctx) error {
 func Network(c *fiber.Ctx) error {
 	return c.Next()
 }
+
+func Image(c *fiber.Ctx) error {
+	return c.Next()
+}

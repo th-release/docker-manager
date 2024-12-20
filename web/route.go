@@ -30,6 +30,10 @@ func SetupRoute(app *fiber.App) *fiber.App {
 	network.Post("/connect", ConnectNetwork)       // 특정 컨테이너 특정 네트워크로 연결
 	network.Post("/disconnect", DisconnectNetwork) // 특정 네트워크로 연결되어있는 컨테이너 연결 제거
 	network.Post("/prune", PruneNetwork)           // 안쓰는 네트워크 삭제
-	// api.Get("/network/:id")
+
+	image := api.Group("/images", Image)
+	image.Get("/", GetAllImage)
+	image.Get("/:id", GetByIdImage)
+	image.Post("/history/:id", GetHistoryById)
 	return app
 }
